@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -69,4 +70,15 @@ dependencies {
     implementation(platform(libs.squareup.retrofit.bom))
     implementation(libs.squareup.retrofit)
     implementation(libs.squareup.converter.gson)
+
+    val roomVersion = "2.8.4"
+    val workVersion = "2.11.2"
+
+    // Room untuk database lokal
+    implementation("androidx.room:room-runtime:$roomVersion")
+    implementation("androidx.room:room-ktx:$roomVersion")
+    ksp("androidx.room:room-compiler:$roomVersion")
+
+    // WorkManager untuk sync saat internet tersedia
+    implementation("androidx.work:work-runtime-ktx:$workVersion")
 }
